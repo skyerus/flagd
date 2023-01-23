@@ -24,6 +24,24 @@ jobs:
       release_created: ${{ steps.release.outputs.release_created }}
       release_tag_name: ${{ steps.release.outputs.tag_name }}
 
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+        with:
+          ref: release-please--branches--main
+      - name: Setup go
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3
+        with:
+          go-version: ${{ env.DEFAULT_GO_VERSION }}
+      - name: Generate docs
+        run: make generate-docs
+      - name: Commit if diff
+        run: |
+          git diff-index --quiet HEAD
+          if [ $? -ne 0 ]; git add ./docs; git commit -s -m "doc generation"; git push
+
   container-release:
     needs: release-please
     runs-on: ubuntu-latest
