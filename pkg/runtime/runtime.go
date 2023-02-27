@@ -3,6 +3,7 @@ package runtime
 import (
 	"context"
 	"errors"
+	"fmt"
 	"os"
 	"os/signal"
 	msync "sync"
@@ -51,6 +52,8 @@ func (r *Runtime) Start() error {
 	if r.Evaluator == nil {
 		return errors.New("no evaluator set")
 	}
+
+	fmt.Println("foo")
 
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer cancel()
