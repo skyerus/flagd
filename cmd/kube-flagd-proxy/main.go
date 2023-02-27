@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"go.uber.org/zap/zapcore"
@@ -13,6 +14,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("initialize zap logger: %v", err)
 	}
+
+	fmt.Println("foo")
 
 	l.Info("kube-flagd-proxy")
 }
