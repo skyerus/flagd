@@ -1,4 +1,4 @@
 {
-  "cmd/flagd": "0.3.7",
-  "cmd/kube-flagd-proxy": "0.1.0"
+  "cmd/flagd": "0.2.7",
+  "cmd/kube-flagd-proxy": "0.2.7"
 }
